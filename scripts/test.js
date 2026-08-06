@@ -23,9 +23,26 @@ const cname = fs.existsSync(path.join(root, 'public/CNAME'))
   : '';
 if (cname !== 'shastasong.aaronik.com') failures.push('public/CNAME must contain only shastasong.aaronik.com');
 
+let themedPages = 0;
+function checkArchivePages(directory) {
+  for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
+    const full = path.join(directory, entry.name);
+    if (entry.isDirectory()) checkArchivePages(full);
+    else if (/\.html?$/i.test(entry.name)) {
+      const contents = fs.readFileSync(full);
+      // Three original image files have misleading .html extensions.
+      if (!contents.subarray(0, 4096).toString().toLowerCase().includes('<html')) continue;
+      themedPages++;
+      if (!contents.includes(Buffer.from('archive-theme.css'))) failures.push(path.relative(root, full));
+    }
+  }
+}
+checkArchivePages(path.join(root, 'archive'));
+if (!themedPages) failures.push('No archive HTML pages found');
+
 if (failures.length) {
   console.error(`Missing local files:\n${[...new Set(failures)].map(file => `  - ${file}`).join('\n')}`);
   process.exit(1);
 }
 
-console.log(`Passed: ${references.length} homepage references and required files are valid.`);
+console.log(`Passed: ${references.length} homepage references and ${themedPages} themed archive pages are valid.`);
