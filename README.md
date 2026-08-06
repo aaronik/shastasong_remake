@@ -8,14 +8,36 @@ A modern, responsive GitHub Pages site for [shastasong.com](https://shastasong.c
 - `assets/` — styles, scripts, and optimized imagery
 - `archive/` — complete mirror of the original site, including all pages, audio, images, PDFs, bios, reviews, and galleries
 
-## Local preview
+## Development and deployment
+
+Install the deployment dependency once:
 
 ```sh
-python3 -m http.server 8080
+npm install
 ```
 
-Then visit <http://localhost:8080>.
+Start the local site at <http://localhost:3000>:
 
-## GitHub Pages
+```sh
+npm start
+```
 
-In the repository settings, choose **Pages → Deploy from a branch**, then select the root of the main branch. No build step is required.
+Validate local links and required files:
+
+```sh
+npm test
+```
+
+Create the production `build/` directory:
+
+```sh
+npm run build
+```
+
+Build and publish `build/` to the repository's `gh-pages` branch:
+
+```sh
+npm run release
+```
+
+The `release` command removes the generated build after a successful deployment. In GitHub repository settings, configure Pages to serve from the `gh-pages` branch.
