@@ -6,6 +6,7 @@ const path = require('path');
 const root = path.resolve(__dirname, '..');
 const build = path.join(root, 'build');
 const entries = ['index.html', 'assets', 'archive'];
+const publicDirectory = path.join(root, 'public');
 
 fs.rmSync(build, { recursive: true, force: true });
 fs.mkdirSync(build, { recursive: true });
@@ -16,6 +17,10 @@ for (const entry of entries) {
     throw new Error(`Required source is missing: ${entry}`);
   }
   fs.cpSync(source, path.join(build, entry), { recursive: true });
+}
+
+if (fs.existsSync(publicDirectory)) {
+  fs.cpSync(publicDirectory, build, { recursive: true });
 }
 
 // Prevent GitHub Pages from processing the archived site with Jekyll.

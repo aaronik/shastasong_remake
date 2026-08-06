@@ -14,9 +14,14 @@ for (const reference of references) {
   if (!fs.existsSync(path.join(root, clean))) failures.push(clean);
 }
 
-for (const required of ['index.html', 'assets/style.css', 'assets/script.js', 'archive/index.html']) {
+for (const required of ['index.html', 'assets/style.css', 'assets/script.js', 'archive/index.html', 'public/CNAME']) {
   if (!fs.existsSync(path.join(root, required))) failures.push(required);
 }
+
+const cname = fs.existsSync(path.join(root, 'public/CNAME'))
+  ? fs.readFileSync(path.join(root, 'public/CNAME'), 'utf8').trim()
+  : '';
+if (cname !== 'shastasong.aaronik.com') failures.push('public/CNAME must contain only shastasong.aaronik.com');
 
 if (failures.length) {
   console.error(`Missing local files:\n${[...new Set(failures)].map(file => `  - ${file}`).join('\n')}`);
