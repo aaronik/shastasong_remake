@@ -33,7 +33,18 @@ window.addEventListener('DOMContentLoaded', () => {
   banner.after(main);
 
   content.querySelectorAll('a[href]').forEach(link => {
-    const href = link.getAttribute('href') || '';
+    const href = (link.getAttribute('href') || '').trim();
+    if (href !== link.getAttribute('href')) link.setAttribute('href', href);
     if (/\.mp3(?:$|\?)/i.test(href)) link.classList.add('archive-audio-link');
+    if (!link.textContent.trim() && !link.querySelector('img')) link.remove();
+  });
+
+  // Remove empty legacy layout cells/rows and invisible spacer images.
+  content.querySelectorAll('img[width="1"], img[height="1"]').forEach(image => image.remove());
+  content.querySelectorAll('td, th').forEach(cell => {
+    if (!cell.textContent.trim() && !cell.querySelector('img, form, iframe, audio, video')) cell.classList.add('archive-empty-cell');
+  });
+  content.querySelectorAll('tr').forEach(row => {
+    if ([...row.cells].length && [...row.cells].every(cell => cell.classList.contains('archive-empty-cell'))) row.classList.add('archive-empty-row');
   });
 });
