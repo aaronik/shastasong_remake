@@ -47,7 +47,7 @@ for (const file of pages) {
   html = html.replace(/<<BODY/i, '<BODY');
   const headClose = /<\/head\s*>/i;
   if (headClose.test(html)) {
-    html = html.replace(headClose, `<meta name="viewport" content="width=device-width, initial-scale=1">\n<link rel="stylesheet" href="${archivePrefix}archive-theme.css">\n</head>`);
+    html = html.replace(headClose, `<meta name="viewport" content="width=device-width, initial-scale=1">\n<link rel="stylesheet" href="${archivePrefix}archive-theme.css">\n<script src="${archivePrefix}archive-theme.js" defer></script>\n</head>`);
   } else {
     html = html.replace(/<body/i, `<link rel="stylesheet" href="${archivePrefix}archive-theme.css">\n<body`);
   }

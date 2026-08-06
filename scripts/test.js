@@ -33,7 +33,7 @@ function checkArchivePages(directory) {
       // Three original image files have misleading .html extensions.
       if (!contents.subarray(0, 4096).toString().toLowerCase().includes('<html')) continue;
       themedPages++;
-      if (!contents.includes(Buffer.from('archive-theme.css'))) failures.push(path.relative(root, full));
+      if (!contents.includes(Buffer.from('archive-theme.css')) || !contents.includes(Buffer.from('archive-theme.js'))) failures.push(path.relative(root, full));
     }
   }
 }
