@@ -14,7 +14,7 @@ for (const reference of references) {
   if (!fs.existsSync(path.join(root, clean))) failures.push(clean);
 }
 
-for (const required of ['index.html', 'assets/style.css', 'assets/script.js', 'archive/index.html', 'public/CNAME']) {
+for (const required of ['index.html', 'thank-you.html', 'assets/style.css', 'assets/script.js', 'assets/thank-you.js', 'archive/index.html', 'public/CNAME']) {
   if (!fs.existsSync(path.join(root, required))) failures.push(required);
 }
 

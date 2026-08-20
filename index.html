@@ -19,6 +19,7 @@
     <button class="menu" aria-expanded="false" aria-controls="nav">Menu</button>
     <nav id="nav" aria-label="Main navigation">
       <a href="#music">Music</a><a href="#events">Events</a><a href="#artists">Artists</a><a href="#offerings">Offerings</a><a href="#videos">Videos</a>
+      <button class="cart-button" type="button" data-open-cart aria-label="Open music cart">Cart <span data-cart-count hidden>0</span></button>
       <a class="nav-cta" href="mailto:anton@shastasong.com">Get in touch</a>
     </nav>
   </header>
@@ -50,10 +51,10 @@
     <section class="music section" id="music">
       <div class="section-head reveal"><div><p class="eyebrow">The recordings</p><h2>Music for the<br><em>inner landscape</em></h2></div><a class="text-link light" href="archive/Antons_CDs/Antons_CDs.html">Full discography <span>→</span></a></div>
       <div class="albums">
-        <article class="album featured reveal"><a href="archive/When_Angels_Dream_3_page/When_Angels_Dream_3_page.html"><img src="assets/images/angels-3.jpg" alt="When Angels Dream III album cover"><span class="play">▶</span></a><div><p>Healing · Meditation · Massage</p><h3>When Angels Dream III</h3><small>Anton Mizerak with Manose, Laura Berryhill, Corbin Keep & Michael Mandrell</small></div></article>
-        <article class="album reveal"><a href="archive/When_Angels_Dream_page/When_Angels_Dream_page.html"><img src="assets/images/angels-1.jpg" alt="When Angels Dream album cover"><span class="play">▶</span></a><p>Deep relaxation</p><h3>When Angels Dream</h3></article>
-        <article class="album reveal"><a href="archive/Harmonica_Sunset_page/Harmonica_Sunset_page.html"><img src="assets/images/harmonica.jpg" alt="Harmonica Sunset album cover"><span class="play">▶</span></a><p>Music with friends</p><h3>Harmonica Sunset</h3></article>
-        <article class="album reveal"><a href="archive/Pacific_Rim_page/Pacific_Rim_page.html"><img src="assets/images/pacific-rim.jpg" alt="Pacific Rim album cover"><span class="play">▶</span></a><p>World · Jazz · New age</p><h3>Pacific Rim</h3></article>
+        <article class="album featured reveal"><a href="archive/When_Angels_Dream_3_page/When_Angels_Dream_3_page.html"><img src="assets/images/angels-3.jpg" alt="When Angels Dream III album cover"><span class="play">▶</span></a><div><p>Healing · Meditation · Massage</p><h3>When Angels Dream III</h3><small>Anton Mizerak with Manose, Laura Berryhill, Corbin Keep & Michael Mandrell</small><div class="album-purchase"><span>Digital album · $10</span><button type="button" data-add-to-cart="angels-3">Add to cart</button></div></div></article>
+        <article class="album reveal"><a href="archive/When_Angels_Dream_page/When_Angels_Dream_page.html"><img src="assets/images/angels-1.jpg" alt="When Angels Dream album cover"><span class="play">▶</span></a><p>Deep relaxation</p><h3>When Angels Dream</h3><div class="album-purchase"><span>Digital album · $10</span><button type="button" data-add-to-cart="angels-1">Add to cart</button></div></article>
+        <article class="album reveal"><a href="archive/Harmonica_Sunset_page/Harmonica_Sunset_page.html"><img src="assets/images/harmonica.jpg" alt="Harmonica Sunset album cover"><span class="play">▶</span></a><p>Music with friends</p><h3>Harmonica Sunset</h3><div class="album-purchase"><span>Digital album · $10</span><button type="button" data-add-to-cart="harmonica-sunset">Add to cart</button></div></article>
+        <article class="album reveal"><a href="archive/Pacific_Rim_page/Pacific_Rim_page.html"><img src="assets/images/pacific-rim.jpg" alt="Pacific Rim album cover"><span class="play">▶</span></a><p>World · Jazz · New age</p><h3>Pacific Rim</h3><div class="album-purchase"><span>Digital album · $10</span><button type="button" data-add-to-cart="pacific-rim">Add to cart</button></div></article>
       </div>
       <div class="music-links reveal"><span>Also explore</span><a href="archive/When_Angels_Dream_2_page/When_Angels_Dream_2_page.html">When Angels Dream II</a><a href="archive/Unwind_page/unwind.html">Unwind</a><a href="archive/Desert_Bloom_page/desert.html">Desert Bloom</a><a href="archive/Live_concert_MP3_page/Live_Concert_MP3_page.html">Free MP3s</a><a href="archive/Downlaod_Antons_newest_music/Download_Antons_newest_music.html">Newest music</a></div>
     </section>
@@ -95,5 +96,15 @@
     <div class="footer-main"><div><a class="brand footer-brand" href="#top"><span class="brand-mark">S</span><span>SHASTASONG<small>Music from Mount Shasta</small></span></a><p>Transformational music for healing,<br>connection, and the joy of being alive.</p></div><div><h4>Explore</h4><a href="#music">Music</a><a href="#events">Events</a><a href="#artists">Artists</a><a href="#offerings">Offerings</a></div><div><h4>Resources</h4><a href="archive/Music Charts/Music_Charts..html">Music charts</a><a href="archive/Group_Photo_Gallery_page/Group_Photo_Gallery_Page.html">Photo gallery</a><a href="archive/ordering_info/ordering_info.html">Order CDs</a><a href="archive/index.html">Original site archive</a></div><div><h4>Connect</h4><a href="mailto:anton@shastasong.com">anton@shastasong.com</a><p>Mount Shasta, California</p></div></div>
     <div class="footer-bottom"><span>© <span id="year"></span> Shastasong</span><span>Made with reverence for music & mountain</span></div>
   </footer>
+  <dialog class="cart-dialog" id="cart-dialog" aria-labelledby="cart-title">
+    <div class="cart-head"><div><p class="eyebrow dark">Your selections</p><h2 id="cart-title">Music cart</h2></div><button class="dialog-close" type="button" data-close-cart aria-label="Close cart">×</button></div>
+    <ul id="cart-items" class="cart-items"></ul>
+    <div class="cart-total"><span>Total</span><strong id="cart-total">$0.00</strong></div>
+    <form id="paypal-checkout" action="https://www.paypal.com/cgi-bin/webscr" method="post">
+      <input type="hidden" name="cmd" value="_cart"><input type="hidden" name="upload" value="1"><input type="hidden" name="business" value="shastasong@snowcrest.net"><input type="hidden" name="currency_code" value="USD"><input type="hidden" name="return" value="https://shastasong.aaronik.com/thank-you.html">
+      <button class="checkout-button" type="submit">Continue to PayPal <span>→</span></button>
+    </form>
+    <p class="cart-note">Secure payment is completed on PayPal. Your download page opens when payment is complete.</p>
+  </dialog>
 </body>
 </html>

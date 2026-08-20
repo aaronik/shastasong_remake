@@ -5,7 +5,7 @@ const path = require('path');
 
 const root = path.resolve(__dirname, '..');
 const build = path.join(root, 'build');
-const entries = ['index.html', 'assets', 'archive'];
+const entries = ['index.html', 'thank-you.html', 'assets', 'archive'];
 const publicDirectory = path.join(root, 'public');
 
 fs.rmSync(build, { recursive: true, force: true });
